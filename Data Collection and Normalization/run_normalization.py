@@ -107,9 +107,3 @@ if True: # NORMALIZATION LOOP --------------
     print("Saving to dat file ...") # Note: binary file is much faster
     with open(merge_all_results_folder+'/wells_zscore_vals.data', 'wb') as file:
         pickle.dump(normalized_data_df, file)
-        
-    print("Saving to csv ...")
-    normalized_data_df.to_csv(merge_all_results_folder+'/wells_zscore_vals.csv')
-                    
-
-
