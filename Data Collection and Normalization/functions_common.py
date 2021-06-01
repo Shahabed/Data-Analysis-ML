@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 
 def get_join_table(filename):
-    tbl = pd.read_csv('../../immunx_meta/data/plate_based_screening_list.csv')
+    tbl = pd.read_csv('../../---/--/plate_based_screening_list.csv')
     tbl.index = tbl['barcode']
     
     join_list = [] # List is much faster in loop appends comapred to DataFrame
@@ -24,7 +24,7 @@ def get_join_table(filename):
         donor = row['donor_1']
         
         layout_name = row['layout']
-        layout_file_path = '../../immunx_meta/data/layouts/'+layout_name+'.csv'
+        layout_file_path = '../../----/data/layouts/'+layout_name+'.csv'
         # print ("For barcode "+barcode+". Reading from layout file: "+layout_file_path)
         layout = pd.read_csv(layout_file_path)
                 
