@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr  6 08:49:55 2020
 
 @author: Shahabedin Chatraee Azizabadi
 """
@@ -33,13 +32,13 @@ def convert_features_dict_to_df(plate_wells_features_dict):
 # --------------------------------------------------------------------
 
 folder_of_well_values = "../../result"
-#folder_of_well_values = "G:\immunix_project\\Normalization\\Result"
+
 
 
 # --------------------------------------------------------------------
 # Consider all the wells?
-plate_wells = functions_common.get_join_table(filename = '../../immunx_meta/data/plate_based_screening_list.csv')
-#plate_wells = functions_common.get_reference_selection(plate_wells )
+plate_wells = functions_common.get_join_table(filename = '../../--/--/plate_based_screening_list.csv')
+
 
 # --------------------------------------------------------------------
 merge_results_folder = './plate-well-features-combined'
