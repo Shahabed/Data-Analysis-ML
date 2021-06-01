@@ -100,7 +100,7 @@ def read_well_features_from_agg_results(well_folder, desired_agg_type):
         return pd.DataFrame() # return an empty dataframe
 
 # ==================================================================
-#CHDPR01S01R01p01E01_A01_quantiles
+
 def read_well_features_from_agg_results_quan(well_file, desired_agg_type):
     
     try:        
