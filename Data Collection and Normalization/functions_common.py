@@ -45,19 +45,15 @@ def get_join_table(filename):
 
 # Split the list into groups ----------------------------------------
 def get_reference_selection(df):
-    df_sel = (df[(df['treatment'] == 'sample_prim01_activ01') |
-                 (df['treatment'] == 'ctrl_prim01_activ01_dmso')|
-                 (df['treatment'] == 'ctrl_prim01_activ02_dmso')|
-                 (df['treatment'] == 'sample_prim01_activ02') |
-                 (df['treatment'] == 'ctrl_prim01_activ02') |
-                 (df['treatment'] == 'ctrl_prim01_activ01')]).copy()
+    df_sel = (df[(df['treatment'] == 'treatment01') |
+                 (df['treatment'] == 'treatment02')|
+                 (df['treatment'] == 'treatment03')|
+                 (df['treatment'] == 'treatment04') |
+                 (df['treatment'] == 'treatment05') |
+                 (df['treatment'] == 'treatment06')]).copy()
     
     return df_sel
     
-#this groupby can be used later
-#df_sel2=df_sel.groupby(['barcode'])
-
-#df_sel2.describe()
 
 # -----------------------------------------------
 def find_well_folder(parent_folder, plate_barcode, well_key):
@@ -130,16 +126,6 @@ def read_well_features_from_agg_results_quan(well_file, desired_agg_type):
         print ("exception: ", e)
         print ("")        
         return pd.DataFrame() # return an empty dataframe
-
-
-
-
-
-
-
-
-
-
 # ==================================================================
 def get_dataframe_memory_usage(data):
     return round(data.memory_usage(deep=True).sum()/(2**20)) # assume 1 MB = 1024 KBs, etc.
