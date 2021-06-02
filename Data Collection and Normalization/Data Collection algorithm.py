@@ -12,6 +12,12 @@ import functions_common
 import pickle
 
 
+def convert_features_dict_to_df(plate_wells_features_dict):
+    dft = pd.DataFrame.from_dict(plate_wells_features_dict, orient='index')
+    a = dft.reset_index()
+    b = a.rename(columns={'level_0':'barcode', 'level_1':'well_key', 'level_2':'treatment'})
+    c = b.set_index(keys=['barcode', 'well_key', 'treatment'])
+    return c
 
 def convert_features_df_to_dict(well_features_df, barcode, well_key, treatment):
     well_features_df['barcode'] = barcode
@@ -21,14 +27,6 @@ def convert_features_df_to_dict(well_features_df, barcode, well_key, treatment):
     b = a.to_dict('index')
     return b
     
-def convert_features_dict_to_df(plate_wells_features_dict):
-    dft = pd.DataFrame.from_dict(plate_wells_features_dict, orient='index')
-    a = dft.reset_index()
-    b = a.rename(columns={'level_0':'barcode', 'level_1':'well_key', 'level_2':'treatment'})
-    c = b.set_index(keys=['barcode', 'well_key', 'treatment'])
-    return c
-
-
 # --------------------------------------------------------------------
 
 folder_of_well_values = "../../result"
@@ -36,7 +34,7 @@ folder_of_well_values = "../../result"
 
 
 # --------------------------------------------------------------------
-# Consider all the wells?
+# Here, we consider all the wells
 plate_wells = functions_common.get_join_table(filename = '../../--/--/plate_based_screening_list.csv')
 
 
@@ -189,14 +187,8 @@ b.rename(columns={'rates':'ask_positive_rates'}, inplace=True)
 c = convert_features_dict_to_df(plate_dict_for_tnfa)
 #c=b.iloc[:,3:-1]
 c.rename(columns={'rates':'tnfa_positive_rates'}, inplace=True)
-#=======================================================================================================IMPORTANT--IMPORTANT
-#Here some suggestion to merge aggregated dat with positive rates
-#result=pd.concat
-#result = a.join(b.set_index('Index'), on='Index')
-#result=pd.merge(a, b,on="Index", how='left')
-#result=pd.merge(a, b, left_on='Index', right_on='Index', how='left').drop('Index', axis=1)
 #========================================================================================================
-
+# In the case we want to add the positive rates to the result.
 #result = pd.merge(a,b['ask_positive_rates'],c['tnfa_positive_rates'])
 #To save data as binary form
 print("Saving to .dat file ...")
