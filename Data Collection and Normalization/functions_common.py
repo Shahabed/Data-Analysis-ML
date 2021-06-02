@@ -15,7 +15,7 @@ def get_join_table(filename):
     tbl = pd.read_csv('../../---/--/plate_based_screening_list.csv')
     tbl.index = tbl['barcode']
     
-    join_list = [] # List is much faster in loop appends comapred to DataFrame
+    join_list = [] # Compared to a DataFrame, a list is much faster in loop appends due to the less memory usage 
     
     for index, row in tbl.iterrows():
         
@@ -24,7 +24,7 @@ def get_join_table(filename):
         
         layout_name = row['layout']
         layout_file_path = '../../----/data/layouts/'+layout_name+'.csv'
-        # print ("For barcode "+barcode+". Reading from layout file: "+layout_file_path)
+        
         layout = pd.read_csv(layout_file_path)
                 
         # Each plate (each row from the main csv file) has several wells:
@@ -65,7 +65,7 @@ def find_well_folder(parent_folder, plate_barcode, well_key):
     full_path_pattern = os.path.join(parent_folder, well_folder_pattern)        
     folders_found = glob.glob(full_path_pattern)
     
-    # assumption: only one folder exists per each well
+    # Important assumption: only one folder exists per each well
     if len(folders_found) > 0:
         return folders_found[0]
     else:
@@ -127,7 +127,7 @@ def read_well_features_from_agg_results_quan(well_file, desired_agg_type):
         return pd.DataFrame() # return an empty dataframe
 # ==================================================================
 def get_dataframe_memory_usage(data):
-    return round(data.memory_usage(deep=True).sum()/(2**20)) # assume 1 MB = 1024 KBs, etc.
+    return round(data.memory_usage(deep=True).sum()/(2**20)) # With assumption that 1 MB = 1024 KBs.
 
 
 def pandas_groupby_to_list(groups, att_name):
