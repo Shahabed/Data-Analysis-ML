@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-
 @author: Shahabedin Chatraee Azizabadi
 """
 
@@ -55,8 +54,8 @@ plates = (plate_wells.groupby('barcode').barcode.count().to_frame('well_count'))
 print("Number of plates:", len(plates))
 
 
-plates_to_process = plates # default: all the plates
-#plates_to_process = plates[0:2] # TODO: just for test. Remove
+plates_to_process = plates # The default is for all the plates
+
 
 test_list = []
 
@@ -191,7 +190,7 @@ c.rename(columns={'rates':'tnfa_positive_rates'}, inplace=True)
 # In the case we want to add the positive rates to the result.
 #result = pd.merge(a,b['ask_positive_rates'],c['tnfa_positive_rates'])
 #To save data as binary form
-print("Saving to .dat file ...")
+print("Saving to .data file ...")
 with open(merge_all_results_folder+'/plate_well_features_combined_for_mean.data', 'wb') as file:
     pickle.dump(a, file)
 print("Saving to .csv ...")
