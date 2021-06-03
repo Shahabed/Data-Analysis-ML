@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-
 @author: Shahabedin Chatraee Azizabadi
 """
 
@@ -79,10 +78,10 @@ def read_well_features_from_agg_results(well_folder, desired_agg_type):
         if os.path.exists(well_file):
             dfs = pd.read_csv(well_file)
         
-            # fix some columns
+            # To fix some columns
             dfs.rename(columns={'Unnamed: 0':'agg_type'}, inplace=True)
             
-            # select desired values
+            # To select desired values
             selected_well_features = (dfs[dfs['agg_type'] == desired_agg_type]).copy()
             
             del dfs
@@ -96,7 +95,7 @@ def read_well_features_from_agg_results(well_folder, desired_agg_type):
         print (">> well_folder:", well_folder)
         print ("exception: ", e)
         print ("")        
-        return pd.DataFrame() # return an empty dataframe
+        return pd.DataFrame() # To return an empty dataframe
 
 # ==================================================================
 
@@ -117,14 +116,14 @@ def read_well_features_from_agg_results_quan(well_file, desired_agg_type):
             return selected_well_features            
         else:
             print("read_well_features_from_agg_results_quan() WARNING: file does not exists:",well_file)
-            return pd.DataFrame() # return an empty dataframe
+            return pd.DataFrame() # To return an empty dataframe
     except Exception as e:
         print ("")
         print (">> read_well_features_from_agg_results_quan():: FAILED ------------------------")
         print (">> well_file:", well_file)
         print ("exception: ", e)
         print ("")        
-        return pd.DataFrame() # return an empty dataframe
+        return pd.DataFrame() # To return an empty dataframe
 # ==================================================================
 def get_dataframe_memory_usage(data):
     return round(data.memory_usage(deep=True).sum()/(2**20)) # With assumption that 1 MB = 1024 KBs.
