@@ -27,16 +27,10 @@ def convert_features_df_to_dict(well_features_df, barcode, well_key, treatment):
     return b
     
 # --------------------------------------------------------------------
-
 folder_of_well_values = "../../result"
-
-
-
 # --------------------------------------------------------------------
 # Here, we consider all the wells
 plate_wells = functions_common.get_join_table(filename = '../../--/--/plate_based_screening_list.csv')
-
-
 # --------------------------------------------------------------------
 merge_results_folder = './plate-well-features-combined'
 if not os.path.exists(merge_results_folder):
@@ -59,26 +53,9 @@ plates_to_process = plates # The default is for all the plates
 
 test_list = []
 
-# NOTE: Rough estimate of the size of well features of all plates combined
-# 179*384*1500 * 8 / (10**6) = 825 MB for all plates  -->   4.6 MB per plate
-#   Assumption:
-#       Features are loaded as float64, therefore we assume 64/8 = 8 bytes per feature
-
-
-# --- Algoritm ---:
-#    for each plate:
-#       for each well of current plate:
-#           read the desired values from the well file
-#           ...
-#       combine-wells-of-current-plate
-#    combine-...
-
-
 plate_dict_for_mean = dict()
 plate_dict_for_ask = dict()
 plate_dict_for_tnfa = dict()
-
-
 
 # Loop per plate, and merge well values per plate
 for plate in plates_to_process.itertuples():
@@ -181,10 +158,10 @@ for plate in plates_to_process.itertuples():
 # Save the big files!
 a = convert_features_dict_to_df(plate_dict_for_mean)
 b = convert_features_dict_to_df(plate_dict_for_ask)
-#b=b.iloc[:,3:-1]
+
 b.rename(columns={'rates':'ask_positive_rates'}, inplace=True)
 c = convert_features_dict_to_df(plate_dict_for_tnfa)
-#c=b.iloc[:,3:-1]
+
 c.rename(columns={'rates':'tnfa_positive_rates'}, inplace=True)
 #========================================================================================================
 # In the case we want to add the positive rates to the result.
