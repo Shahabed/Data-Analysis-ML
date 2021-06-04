@@ -9,7 +9,17 @@ import os
 import glob
 import matplotlib.pyplot as plt
 
-
+# Split the list into groups ----------------------------------------
+def get_reference_selection(df):
+    df_sel = (df[(df['treatment'] == 'treatment01') |
+                 (df['treatment'] == 'treatment02')|
+                 (df['treatment'] == 'treatment03')|
+                 (df['treatment'] == 'treatment04') |
+                 (df['treatment'] == 'treatment05') |
+                 (df['treatment'] == 'treatment06')]).copy()
+    
+    return df_sel
+#---------------------------------------------------------------
 def get_join_table(filename):
     tbl = pd.read_csv('../../---/--/plate_based_screening_list.csv')
     tbl.index = tbl['barcode']
@@ -40,26 +50,9 @@ def get_join_table(filename):
     join_table = pd.DataFrame(join_list, columns=col_names)
     return join_table
     
-
-# Split the list into groups ----------------------------------------
-def get_reference_selection(df):
-    df_sel = (df[(df['treatment'] == 'treatment01') |
-                 (df['treatment'] == 'treatment02')|
-                 (df['treatment'] == 'treatment03')|
-                 (df['treatment'] == 'treatment04') |
-                 (df['treatment'] == 'treatment05') |
-                 (df['treatment'] == 'treatment06')]).copy()
-    
-    return df_sel
-    
-
 # -----------------------------------------------
 def find_well_folder(parent_folder, plate_barcode, well_key):
-    # Search for the well folder:
-    # Assumptions for folder name pattern:
-    # - ends with well-key
-    # - there is at least one character between barcode and well-key
-    
+     
     well_folder_pattern = '*' + plate_barcode + '?*' + well_key
     full_path_pattern = os.path.join(parent_folder, well_folder_pattern)        
     folders_found = glob.glob(full_path_pattern)
@@ -126,7 +119,8 @@ def read_well_features_from_agg_results_quan(well_file, desired_agg_type):
         return pd.DataFrame() # To return an empty dataframe
 # ==================================================================
 def get_dataframe_memory_usage(data):
-    return round(data.memory_usage(deep=True).sum()/(2**20)) # With assumption that 1 MB = 1024 KBs.
+    # We have the assumption that 1 MB = 1024 KBs.
+    return round(data.memory_usage(deep=True).sum()/(2**20)) 
 
 
 def pandas_groupby_to_list(groups, att_name):
