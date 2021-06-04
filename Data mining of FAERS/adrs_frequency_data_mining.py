@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 15 11:04:38 2020
-
 @author: Shahabedin Chatraee Azizabadi
-Algorithm for the data mining of the large frequency tables of ADRs data
-
 """
 import pandas as pd
 import numpy as np
@@ -13,14 +9,14 @@ import time
 import sys
 '''The  method used here is Proportional Reporting Ratio'''
 #First we import the joint ADRs data frame 
-df=pd.read_csv("/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/ADRs_data_processing/test_dataframe_result.csv").head(1000)
+df=pd.read_csv("/test_dataframe_result.csv")#.head(1000)
 
-# A function for computation of different frequencies
-#Here for all the functions we can define a class with  a group of input whci is common between them 
+# A function is defined for the computation of different frequencies
+
 def frequencies_calc(df,drug, effect):
     
-    #First we import the joint ADRs data frame 
-    ADRs_joint=df
+    
+    ADRs_joint=df # To import the joint ADRs data frame 
     N=ADRs_joint['prefered_reaction_term'].count()
     D=(ADRs_joint['drug_name'] == drug).sum()
     E=(ADRs_joint['prefered_reaction_term'] == effect).sum()
@@ -45,7 +41,7 @@ def PRR_algorithm(df,drug, effect):
     return PRR,DE
 
 #<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
-#A function to compute the Chi-squared value (χ2 with Yates' correction) 
+# To compute the Chi-squared value (χ2 with Yates' correction) 
 
 def chi_squared_algorithm(df,drug, effect):
    N,D,E,e,d,DE,dE,De,de=frequencies_calc(df,drug,effect)
@@ -62,7 +58,7 @@ def chi_squared_algorithm(df,drug, effect):
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#This function is to itterate ove the ADRs table and produce the frequency table
+#The goal of the following function is to itterate ove the ADRs table and produce the frequency table where we will use it for the filtering of data
 
 def Adrs_freq_table(df):
     
@@ -70,8 +66,7 @@ def Adrs_freq_table(df):
     ADRs_joint=ADRs_joint.rename(columns = {' case_id':'case_id'})
     freq_list=[]
     try:
-    
-    
+       
         for val in ADRs_joint.itertuples():
             primary_id=val.primary_id
             case_id=val.case_id
@@ -91,8 +86,7 @@ def Adrs_freq_table(df):
             
             freq_list.append([primary_id,case_id,occp_code,drug,product_ai,effect,PRR,chi,DE])
             sys.stdout.write('.'); sys.stdout.flush(); 
-            
-            
+                       
     except Exception as e:
        print ("")
        print (">> Data mining-loop FAILED at: ---------------------")
@@ -101,9 +95,8 @@ def Adrs_freq_table(df):
     col_names =  ['primary_id','case_id','occp_code','drug_name','product_ai',' prefered_reaction_term',  'PRR','chi_2','DE']
     freq_table=pd.DataFrame(freq_list, columns=col_names)  
     return freq_table
-#<<<<<<>>>>>>>>><<<<<<<<<<>>>>>>>>>>><<<<<<<<<<<<<<>>>>>>>><<<<<<>><
 #___>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#Filtering function for finding interesting drug vs effect associations
+#Filtering function for finding nonrandom drug vs effect associations
 
 def filt_Adrs_freq(freq_table,DE_tresh,PRR_tresh,chi_2_tresh):
     
@@ -113,8 +106,6 @@ def filt_Adrs_freq(freq_table,DE_tresh,PRR_tresh,chi_2_tresh):
        
     return df
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
 time_started = time.time()
 
 dff=Adrs_freq_table(df)
@@ -126,4 +117,3 @@ dff_fil.to_csv('frequency_filtered_df.csv')
 
 time_end = time.time()
 print("Elapsed", np.round(time_end-time_started, 2), "seconds")
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><
