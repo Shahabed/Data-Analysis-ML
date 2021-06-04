@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-
 @author: Shahabedin Chatraee Azizabadi
 """
+import numpy as np
+import pickle
 import functions_common
 import pandas as pd
 import time
-import numpy as np
-import pickle
-
 
 def median_absolute_deviation(df):    
     # Formula: median ( abs( a - median(a)) )
@@ -25,30 +23,18 @@ def zscore(well_features, means, stds):
     norms = np.zeros_like(x, dtype=float)
     norms.fill(np.inf) # Now, we will know that Inf means std was zero (division by zero)
     np.divide(x, y, where=y!=0, out=norms)    
-    # NOTE:
-    # When out=None, locations within the returned array where the condition is False will remain uninitialized,
-    # and therefore could lead to unexpected random values appearing in those locations!
-    # 'uninitialized' here means it could be an unexpected random value
-
-    # Usual code:
-    # norms = (well_features - means) / stds
-    #   This could have unexpected results depending on the numpy.errstate settings
-    #   If the error handling setting is so, division by zero throws an exception
-    
+      
     return norms
 
 #==========================================================================
-#==========================================================================
 
-merge_all_results_folder = "/home/cellprofiler/Desktop/data_processing_immunx/agg_norm_scripts/norm_script/all-plate-well-features-combined"
+merge_all_results_folder = "/---/all-plate-well-features-combined"
 
 if True: # Load aggregated per well values
     print("Loading aggregated data from file ...")    
     aggregated_data_df = pd.read_csv(merge_all_results_folder+'/plate_well_features_combined_for_percentile.csv')
     print("aggregated_data_df memory usage =", functions_common.get_dataframe_memory_usage(aggregated_data_df),'MB')
 
-
-# What function to call in the loop?
 norm_func = zscore # can be any other function
 
 if True: # NORMALIZATION LOOP --------------    
