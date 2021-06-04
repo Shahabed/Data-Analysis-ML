@@ -1,8 +1,9 @@
 # Introduction:
 # 1.Data Collection algorithm.py
 The first algorithm to run is "Data Collection algorithm.py". This algorithm handles the complex database where the raw data(which is already aggregated) are stored. It collects and combine the separately stored sets of futures. These features-sets are stored separate directory and files based on their barcodes and well-keys. 
-# NOTE: Rough estimate of the size of well features of all plates combined
-  179*384*1500 * 8 / (10**6) = 825 MB for all plates  -->   4.6 MB per plate
+# NOTE: 
+    Rough estimate of the size of well features of all plates combined
+    179*384*1500 * 8 / (10**6) = 825 MB for all plates  -->   4.6 MB per plate
     Assumption:
     Features are loaded as float64, therefore we assume 64/8 = 8 bytes per feature
 
