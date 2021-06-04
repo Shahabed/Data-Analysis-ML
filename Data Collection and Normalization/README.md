@@ -29,4 +29,4 @@ The normalization algorithm, "run_normalization.py", uses the collected and comb
      This could have unexpected results depending on the numpy.errstate settings
      If the error handling setting is so, division by zero throws an exception
 # 3.function_common.py
-The "function_common" contains a set of function which are called in both above algorithms. 
+The "function_common" contains a set of functions which are called in both above algorithms. 
