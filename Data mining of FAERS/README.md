@@ -29,3 +29,6 @@ distance-based filtered data is produced, including the new columns for these tw
 # 3. Pre-classification analysis
 Before going through the classification process, it is desirable to analyze the result that obtained from the association between FEARS and screening databases. 
 For that purpose, the ` Pre-classification analysis` algorithm is designed.
+The first function, `ranking_adrs` is defined to explore the ranking between the reported ADRs effect. Another important function is `ADRs_drug_association`, where a representation of the association between ADRs and corresponding drugs is computed. There is a need to create a table with unique drugs which are similarly matched. This can be done by using the function ` unique_drug_matching`. We might want to find a drug matching between two databases for a specific ADR.
+The function `drug_related_to_one_Adrs` is designed to handle exactly that calculation. A function for finding the compound drugs with the same ADRs is developed as `compound_drugs_with_same_ADR`. Finally, for the ranking between the compound drugs, the `ranking_compond_drugs` is proposed.
+ 
