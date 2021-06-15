@@ -13,26 +13,23 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import LabelEncoder
 
-# we can import a list of categorize ADRs which can be used later as treshold
+# we can import a list of categorize ADRs which can be used later as a threshold
 def import_ADRs_list(name):
-    full_name='/Volumes/TOSHIBA/immunix_project/ADRs project/Classification/binary_classifier/list of important ADRs/'+name
+    full_name='/list of important ADRs/'+name
     df=pd.read_excel(full_name)
     ADRs_df=df[['compound_drug','Unique concatenate(prefered_reaction_term)']]
-    #For the infection list use the following script
+    #For the infection list use the following script as the structure of this dataframe differs from the others
     #ADRs_df=df[['compound_drug','Concatenate(prefered_reaction_term)']]
     
     return ADRs_df
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-#A functionunction to add a binary column based on the ADRs_list
-
+#A function to add a binary column as the label vector based on the ADRs_list
 def binary_column(data,ADRs_df):
     ADRs_list=ADRs_df['Unique concatenate(prefered_reaction_term)'].values.tolist()
-    #For the infection list use the following script
+    #For the infection list use the following script for the same reason mentioned above
     #ADRs_list=ADRs_df['Concatenate(prefered_reaction_term)'].values.tolist()
     drug_list=ADRs_df['compound_drug'].values.tolist()
-    binary_list=[]
-    
+    binary_list=[]    
     try:
         for d in data.itertuples():
             drug1=d.compound_drug
@@ -46,8 +43,7 @@ def binary_column(data,ADRs_df):
                 binary='NO'
                     #saving to the lists#
             
-                binary_list.append(binary)
-           
+                binary_list.append(binary)           
     
     except Exception as e:
        print ("")
@@ -59,7 +55,7 @@ def binary_column(data,ADRs_df):
         
     return data
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#A FUNCTION for dsing matrix, label and spliting
+#A function for the spliting of the design matrix and the label vector
 def spliting_for_classifier(features_matrix,labels):
     
     (X, y) = (features_matrix, labels)
@@ -67,17 +63,14 @@ def spliting_for_classifier(features_matrix,labels):
     
     return X_train, X_test, y_train, y_test
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-# The input of the function is the test data set provided by experimentalist to examine the generalization of the 
+# The input of the function is the test data set provided by the experimentalist to examine the generalization of the 
 # classification algorithm, how good the algorithm generalize. Also we have the main data set
-# to match and extract the necessary information for creating X_test and y_test, the test data set is just the name 
-# of drugs and ADRs and dose not contain the information(feature set and labels) for practicing classification.
+# to match and extract the necessary information for creating the X_test and y_test, the test data set is just the name 
+# of drugs and ADRs and does not contain the information(feature set and labels) for the  processing of the  classification.
 def input_for_pred(pred_test,data):
-    
     #  We match the test data set with the main data set and extract part of the data with contains the 
     # Drug_ADR names.
     data_for_pred=data[data['barcode'].isin(pred_test['Barcode']) & data['well_key'].isin(pred_test['R1_Well'])| data['well_key'].isin(pred_test['R2_Well'])| data['well_key'].isin(pred_test['R3_Well'])]#| data['well_key'].isin(pred_test['R1_Well'])| data['well_key'].isin(pred_test['R1_Well'])]
-    
     data_for_pred=data_for_pred.reset_index()
     # For the case that we have the data without manifold learning
     #xtest=data_for_pred.loc[:,'2_percentile_ascspecks_AreaShape_Area':]
