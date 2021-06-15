@@ -108,7 +108,7 @@ ax.invert_yaxis()  # labels read top-to-bottom
 ax.set_xlabel('Number of associated drugs')
 ax.set_title('ADRS-drug association ranking')
 
-plt.show()'''
+plt.show()
 #>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 #>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # l=count_unique_rows(df,"compound_drug")
