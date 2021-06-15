@@ -11,11 +11,10 @@ import numpy as np
 import time
 import matplotlib.pyplot as plt
 
-
-df=pd.read_csv('/Volumes/TOSHIBA/immunix_project/ADRs project/adrs_computation/similarity_table_complete_data__0.9.csv',index_col=1)
+df=pd.read_csv('/similarity_table_complete_data__0.9.csv',index_col=1)
 df1=df.drop_duplicates( subset=[ "compound_drug", "adrs_drug" ,"prefered_reaction_term"], keep="first", inplace=False)
-# The first function is to find ranking between the reported effects 
 
+# The first function is to find ranking between the reported effects 
 def ranking_adrs(df):
     #a=df.groupby(['adrs_drug','prefered_reaction_term'], as_index=False).count()
     df=df.drop_duplicates( subset=[ "compound_drug", "adrs_drug","prefered_reaction_term"], keep="first", inplace=False)
@@ -53,11 +52,8 @@ def unique_drug_matching(df):
     c=df.drop_duplicates( subset=[ "compound_drug", "adrs_drug" ], keep="first", inplace=False, )
     
     return c
-
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 #A function to a drug matching between two databases for one specific ADR
-
-
 def drug_related_to_one_Adrs(df,adrs):
     df=df[['compound_drug','adrs_drug','prefered_reaction_term']]
     k=df.loc[df['prefered_reaction_term'] == adrs]
@@ -76,7 +72,6 @@ def ranking_compond_drugs(df):
     
     
     return f
-
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # A function for finding the compound drugs withe same ADRs 
 def compound_drugs_with_same_ADR(df1,reaction):
@@ -90,7 +85,6 @@ def compound_drugs_with_same_ADR(df1,reaction):
         x='empty'
     
     return w,x
-
 #>>>>>>>><IMPLIMENTATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 start = time.time()
