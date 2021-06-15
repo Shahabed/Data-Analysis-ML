@@ -17,8 +17,8 @@ import sys
 
 # The first step is to upload the compounds and ADR-report data frames 
 
-compound_data=pd.read_csv('SelleckChem_run1_compunds_screening_d.csv',index_col=0)
-adrs_data=pd.read_csv('/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/test_dataframe_result.csv',index_col=0)
+compound_data=pd.read_csv('compunds_screening_d.csv',index_col=0)
+adrs_data=pd.read_csv('/test_dataframe_result.csv',index_col=0)
 
 #Here in we creat two lists out of drug name in compund data and adrs data: the content od columns are series should be converted to list
 # drug_compound_data=compound_data['Product Name'].tolist()
