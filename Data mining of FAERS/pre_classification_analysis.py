@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov 16 13:21:09 2020
-
 @author: Shahabedin Chatraee Azizabadi
-Scipt for data analysis of result of similarity_matching algorithm 
 """
 import pandas as pd
 import numpy as np
@@ -88,7 +85,7 @@ def compound_drugs_with_same_ADR(df1,reaction):
 #>>>>>>>><IMPLIMENTATION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 start = time.time()
-'''a=ranking_adrs(df)
+a=ranking_adrs(df)
 
 b=a.head(30)
 #>>>>>>>>>>>>>>>A direct script for the ploting the ADRs ranking>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -128,7 +125,7 @@ w.to_csv('compound_drugs_with_same_ADRs_new_information.csv')
 
 #>>>>>>>>>>>>>>Ploting the ranking of compound drugs >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-'''f1=f.head(30)
+f1=f.head(30)
 fig,ax = plt.subplots(1,1)
 x = f1['compound_drug']
 y1 = f1['count']
@@ -137,7 +134,7 @@ ax.set_ylabel('prefered_reaction_term_count',fontsize=13)
 ax.set_xlabel('compound_drug',fontsize=13)
 ax.bar(x, y1, label="Number of unique ADR")
 fig.autofmt_xdate()
-plt.legend(loc="upper right")'''
+plt.legend(loc="upper right")
 #>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<
 time_end = time.time()
 print("Elapsed", np.round(time_end-start, 2), "seconds")
