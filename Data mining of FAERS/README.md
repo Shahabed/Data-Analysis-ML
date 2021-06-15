@@ -1,9 +1,10 @@
 
-# Introduction:
+
 # Goals of the project:
 * A primary data extraction and basic filtering on FEARS database.
 * Computation of important frequencies and selecting the matches between drug and ADRs beyond random reporting.
 * Association and matching between FEARS data and screening data, so we can use the ADRs in FEARS database for classification of our screening data.
+# Introduction:
 Herein, a description of how to implement the series of Algorithems for the advers drug reaction project is given.The first step to start the process, is to run the  "adrs_data_processing.py". The adequet information for this particular algorithm can be found in the corresponding README. The explanation for the computational steps after "adrs_data_processing" follows as:
 # 1. Frequency-Based data mining
 Frequency data mining is a method used in the Pharmacovigilance. 
