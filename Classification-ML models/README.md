@@ -4,7 +4,7 @@
 The first attempt is to binary classify the drug (or chemical compound) based on the feature set, collected from the screening data. The drug’s  possible reactions will be classified in six categories of ADRs, one can predict a drug belongs (or do not belong) to a category of ADR. 
 The second approach is to use multiclass classification methods. Here again, we use the six categories of ADR and predict in which category of ADR a drug's reactions might belong. The description of the multiclass approach is described in a separate README. 
 
-# 1.Classification algorithm:binary
+# 1.Classification algorithm_binary
 Three functions are defined in this script. The functions `naive_bay`and `Binary_sup_vec_machine`are two classification models that we use here. The function 
 `other_eval_methods` is for the additinional evaluation metrics which can be used for the above classification models. These additional metrics give a better insight to the performance od the classifier. The algorithm `additional_functions_for_binary` is also called in for the other useful functions that is used here. 
 # 2. Addirional function for the binary classification
