@@ -17,8 +17,8 @@ from sklearn import metrics
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 # First reading the output result of classification_data_preprocessing
-#data=pd.read_csv('/Volumes/TOSHIBA/immunix_project/ADRs project/Classification/data_processed_for_classification.csv')
-data=pd.read_csv('/Volumes/TOSHIBA/immunix_project/ADRs project/Classification/new_data_processed_for_classifi_KPCA.csv')
+#data=pd.read_csv('/data_processed_for_classification.csv')
+data=pd.read_csv('/new_data_processed_for_classifi_KPCA.csv')
 
 def maxEnt_classifier(X_train, X_test, y_train, y_test):
     # Making  an instance of the classification Model
@@ -26,7 +26,7 @@ def maxEnt_classifier(X_train, X_test, y_train, y_test):
     maxent.fit(X_train, y_train)
     #That is a matrix with the shape (n_classes, n_features):Coefficient of the features in the decision function can be obtain as follow:
     cof=maxent.coef_
-    #Predict class labels for samples in X
+    #Predict the class labels for samples in X
     y_predicted = maxent.predict(X_test)
     #>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     con_mat=metrics.confusion_matrix(y_test,y_predicted)
@@ -39,9 +39,7 @@ def random_forest_classifier(X_train, X_test, y_train, y_test):
     
     Randomf = RandomForestClassifier(n_estimators=20,criterion = 'entropy', random_state=42)
     Randomf.fit(X_train, y_train)
-    #cof2=regressor.coef_
-    y_pred = Randomf.predict(X_test)
-    #dev_acc = accuracy_score(y_test, y_pred)
+    y_pred = Randomf.predict(X_test)    
     con_mat=metrics.confusion_matrix(y_test,y_pred)
     class_report=metrics.classification_report(y_test,y_pred)
     Accuracy=metrics.accuracy_score(y_test, y_pred)
@@ -56,7 +54,6 @@ def SVM_classifier(X_train, X_test, y_train, y_test):
     return con_mat2,Accuracy2
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 def naive_bay(X_train, X_test, y_train, y_test,method):
-    #nvb=naive_bayes.GaussianNB()
     nv=getattr(naive_bayes,method)
     nvb=nv()
     nvb.fit(X_train, y_train)
@@ -68,10 +65,11 @@ def naive_bay(X_train, X_test, y_train, y_test,method):
 #>>>>>>>>>>>evaluation of classifiers<<<<<<<<<<<< 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<
 time_started = time.time()
-#features_matrix=data.loc[:,'2_percentile_ascspecks_AreaShape_Area':]
+#features_matrix=data.loc[:,'2_percentile_AreaShape_Area':]
 # Feature matrix in the case of manifold learning application
 features_matrix_after_manifold=data.loc[:,'feature1':]
 labels=data['prefered_reaction_term']
+#>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # label encoding and feature matrix scaling
 labelencoder = LabelEncoder()
 labels=labelencoder.fit_transform(labels)
@@ -79,7 +77,8 @@ sc = StandardScaler()
 scaler = MinMaxScaler()
 features_matrix_non_negative=scaler.fit_transform(features_matrix_after_manifold)
 (X, y) = (features_matrix_non_negative, labels)
-# #Herein, we need to split data to train and test
+#>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# Test and train spliting
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 #>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # Testing maxEnt
