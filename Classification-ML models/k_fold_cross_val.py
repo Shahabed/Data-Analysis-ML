@@ -9,14 +9,11 @@ K-fold Cross-validation of classification algorithm
 """
 import time
 import numpy as np
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
 import pandas as pd
 import additional_functions_for_binary
 from sklearn.preprocessing import LabelEncoder,MinMaxScaler
-from sklearn import svm
-from sklearn import metrics
-from sklearn import naive_bayes
+from sklearn import svm, metrics,naive_bayes
 import matplotlib.pyplot as plt
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #----------------cross-validated metric---------------------------------------------------
@@ -27,6 +24,7 @@ def cross_va_scor(features_matrix_non_negative, labels):
     return scores
 #>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 #-------cross-validation with k-fold
+
 
 def k_fold_cross(X,y, model,k):
     
@@ -49,16 +47,16 @@ def k_fold_cross(X,y, model,k):
             acc_score.append(acc)
             f1_co.append(f1)
             perc_co.append(perc)
-        avg_acc_score = sum(acc_score)/k
-        
-        return avg_acc_score,acc_score,f1_co,perc_co
+        avg_acc_score = sum(acc_score)/k     
+       
     except Exception as e:
          print ("")
          print (">> The cross validation process:: FAILED ------------------------")
          print (">> model:", model)
          print ("exception: ", e)
          print ("")        
-         return pd.DataFrame()
+         #return pd.DataFrame()
+    return avg_acc_score,acc_score,f1_co,perc_co
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # A function for different methods in Näive Bayes: The goal is to produce different models with these methods 
 
