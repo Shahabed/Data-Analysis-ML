@@ -1,23 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov 24 13:31:52 2020
-
 @author: Shahabedin Chatraee Azizabadi
 Data processing for classification: Here we creat X(design matrix) and Y(label) vectors, encode Y vector and creat binary data set for binary classifier 
 """
 import pandas as pd
 import numpy as np
 import time
-import jellyfish
 
-#Import the similarity table
+#Import the similarity table as a result of data mining of FAERS.
 
-sim_tab=pd.read_csv('/Volumes/TOSHIBA/immunix_project/ADRs project/adrs_computation/similarity_table_complete_data__0.9.csv',index_col=0)
+sim_tab=pd.read_csv('/similarity_table_complete_data__0.9.csv',index_col=0)
 
-#Import the screening data
+#Import the screening data here. 
 
-screen_data=pd.read_csv('/Users/chatraees/Desktop/feature_reduction_correlation_matrix_0.9_ratio.csv',index_col=0)
+screen_data=pd.read_csv('/feature_reduction_correlation_matrix_0.9_ratio.csv',index_col=0)
 
 
 
@@ -65,11 +62,7 @@ def data_imputation(df):
 time_started = time.time()
 
 
-mis_list=[('Rifaximin','RIFAMPICIN'),('Ganciclovir','ACICLOVIR'),('Ganciclovir','Aciclovir'),('Aciclovir','GANCICLOVIR'),('Mecarbinate','RECOMBINATE'),('Lincomycin HCl','VANCOMYCIN HCL')
-          ,('Famciclovir','ACICLOVIR'),('Famciclovir','Aciclovir'),('Mesalamine','MESALAZINE Unk'),('Mesalamine','MESALAZINE'),('Ciclopirox','CICLOSPORIN')
-          ,('Coumarin','COUMADINE'),('Coumarin','COUMADIN'),('Nilvadipine','NICARDIPINE'),('Valganciclovir HCl','Valaciclovir'),('Vinblastine sulfate','VINCRISTINE SULFATE.')
-          ,('Cefuroxime sodium','CEFOTAXIME SODIUM'),('Ropivacaine HCl','BUPIVACAINE HCL'),('Clopidol','CLOPIDOGREL')
-          ,('Procaine','PROPECIA'),('Remodelin','REMODULIN')]
+mis_list=[]# This list should be provided for filtering mismatches
 
 
 #First remove the duplicated association
