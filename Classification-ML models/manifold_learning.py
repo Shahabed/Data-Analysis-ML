@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Mar 12 16:23:39 2021
 
 @author: Shahabedin Chatraee Azizabadi
 
@@ -16,10 +15,10 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 import matplotlib.pyplot as plt
 #First step is to read the dataset and select the feature matrix
 
-data_in=pd.read_csv('/Volumes/TOSHIBA/immunix_project/ADRs project/Classification/data_processed_for_classification.csv')
+data_in=pd.read_csv('/data_processed_for_classification.csv')
 
 
-design_matrix=data_in.loc[:, '2_percentile_ascspecks_AreaShape_Area':]
+design_matrix=data_in.loc[:, '2_percentile_AreaShape_Area':]
 
 #--Multicolinearity measure:VIF. WE impliment the VIF to compare the level of multicolinearity. generaly gives a value for
 #-- each feature. 
@@ -28,12 +27,8 @@ def VIF_computation(X):
     vif = pd.DataFrame()  
     vif["features"] = X.columns # Here we choose the column labels of the data frame
     vif["VIF Factor"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
-   
     
     return vif
-
-
-
 # Herein, we can define different functions for the dimensionality reduction
 
 # The kernel PCA
@@ -51,14 +46,12 @@ def PCA_al(X):
     X_principalComponents = pca.fit_transform(X)
     return X_principalComponents
 
-
 #The second candidate is Isomap
 
 def isomap_al(X):
     embedding = Isomap(n_neighbors=61,n_components=60)
     X_transformed = embedding.fit_transform(X)#[:100])
     return X_transformed 
-
 
 #The third candidate is locally linear embeding
 def local_lin_embed(X):
@@ -68,7 +61,6 @@ def local_lin_embed(X):
     X_transformed = embedding.fit_transform(X)
     
     return X_transformed
-
 #------->>>><>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<>>><<<<<<<>>><<>><<>
 # First, one should transfer the result of manifold learning to a data frame
 # and also, one should join back the result to the original dataframe with the meta-data 
