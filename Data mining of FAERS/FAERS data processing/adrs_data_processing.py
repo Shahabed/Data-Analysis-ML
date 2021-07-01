@@ -16,21 +16,17 @@ import functions_set
 
 # reading the FAERS data
 
-df_drug=pd.read_csv('/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/drug.csv')
+df_drug=pd.read_csv('/drug.csv')
 #>>>>>>>>>>>>>>>> head=dft.head(Number of rows from top)   This function,head(), can be used to pick up some rows from the top of the data frame.
 #Should be disabled if one wants the whole dataframe
-df_demographic=pd.read_csv('/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/demographic.csv')#.head(5000)
-df_reaction=pd.read_csv('/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/reaction.csv',sep = '\t')
+df_demographic=pd.read_csv('/demographic.csv')#.head(5000)
+df_reaction=pd.read_csv('/reaction.csv',sep = '\t')
 #<<<<<<<<<<<<<-------------------------.......,,,,,,,,,,,,,,,,,,,,,,,,---------------------------------------------------------------------------
-# df_indication=pd.read_csv('/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/indication.csv',sep='\t')
-# df_therapy=pd.read_csv('/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/therapy.csv',sep='\t')
-
-
 time_started = time.time()
 
 # ****Finding the  corrupted lines that causes the problem in the reading of csv, to run it******* turn False>>>>True*****
 if False: 
-    file = '/Volumes/TOSHIBA/immunix_project/compound information with adverse effects/20200917-CSV-export/reaction.csv' # use your filename
+    file = '/reaction.csv' # use your filename
     lines_set = set([100, 200]) # use your bad lines numbers here
     
     with open(file) as f_obj:
