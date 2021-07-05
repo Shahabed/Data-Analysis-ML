@@ -186,25 +186,6 @@ plt.legend(loc="upper right")
 
 time_end = time.time()
 print("Elapsed", np.round(time_end-start, 2), "seconds")
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#a=get_similarity_table(compound_data,adrs_data,0.8)
-
-
-# # ## a.to_csv("similarity_table.csv")
-
-# b=evaluation_function(a)
-
-# ##b['index_col'] = b.index
-# ## A new index column is created 
-# b['new_col'] = range(1, len(b) + 1)
-
-# ## Map booliand column to 0 and 1
-# b=b.fillna(False)
-# b["matching_rate"] = b["matching_rate"].astype(int)
-
-# b.to_csv('eval_table.csv')
-
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 ##Ploting regarding the cases showing the jaro-winkler similarity and match rating comparison
 
@@ -236,7 +217,4 @@ print("Elapsed", np.round(time_end-start, 2), "seconds")
 # ax1.set_ylabel('similarity_distance',fontsize=13)
 # ax1.set_xlabel('matching_case_number',fontsize=13)
 # ax3.set_ylabel('matching_rate',fontsize=13)
-
 #plt.legend([a1,a2],["plot 1", "plot 2"])
-
-
