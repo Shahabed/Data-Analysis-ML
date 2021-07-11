@@ -1,6 +1,7 @@
 # Data-Analysis and ML
 Herein, the state of the art algorithems for different aspect of data analysis and ML are presented. 
-# Introduction:
+# I. Data Collection and Normalization:
+
 ## 1.Data Collection algorithm.py
 The first algorithm to run is "Data Collection algorithm.py". This algorithm handles the complex database where the raw data(which is already aggregated) are stored. It collects and combine the separately stored sets of futures. These features-sets are stored separate directory and files based on their barcodes and well-keys. 
 ## NOTE: 
@@ -32,6 +33,10 @@ The normalization algorithm, "run_normalization.py", uses the collected and comb
      If the error handling setting is so, division by zero throws an exception
 ## 3.function_common.py
 The "function_common" contains a set of functions which are called in both above algorithms. 
+
+
+# II.Data mining of FAERS
+
 ## Goals of the project:
 * A primary data extraction and basic filtering on FEARS database.
 * Computation of important frequencies and selecting the matches between drug and ADRs beyond random reporting.
@@ -63,6 +68,9 @@ Before going through the classification process, it is desirable to analyze the 
 For that purpose, the ` Pre-classification analysis` algorithm is designed.
 The first function, `ranking_adrs` is defined to explore the ranking between the reported ADRs effect. Another important function is `ADRs_drug_association`, where a representation of the association between ADRs and corresponding drugs is computed. There is a need to create a table with unique drugs which are similarly matched. This can be done by using the function ` unique_drug_matching`. We might want to find a drug matching between two databases for a specific ADR.
 The function `drug_related_to_one_Adrs` is designed to handle exactly that calculation. A function for finding the compound drugs with the same ADRs is developed as `compound_drugs_with_same_ADR`. Finally, for the ranking between the compound drugs, the `ranking_compond_drugs` is proposed.
+ 
+ # III. Classification-ML models
+ 
  
 # The goal of the classification:
 * Classification of adverse reactions. We want to predict, based on our feature set, what adverse reaction (ADR) or category of adverse reaction each drug results in. 
