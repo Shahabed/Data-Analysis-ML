@@ -84,7 +84,7 @@ Three functions are defined in this script. The functions `naive_bay`and `Binary
 ## 2. Additional  function for the binary classification
 The first function is `import_ADRs_list` that can be used to import a list of categorize ADRs which can later be set as a threshold. The function `binary_column` is defined to add a binary column as the label vector based on the ADRs_list. For the spliting of the data to the train/test , the splitting  of the design matrix and the label vector, the `spliting_for_classifier` is defined. Finally, for plotting  the confusion matrix based on different classifiers which is given as input,`plot_confusion_matrix` is provided. 
 
-## 3. manifold_learning
+## 3. Manifold_learning
 The function `VIF_computation` is developed for the computation of the variance inflation factor. It has a purpose to find high level of multicollinearity between independent variables (the set of features). Four functions, `KPCA_al`,`PCA_al`,`isomap_al`and`local_lin_embed` are defined representing four different manifold learning methods.   
 
 ## 4. k_fold_cross_validation
